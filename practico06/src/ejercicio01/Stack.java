@@ -34,10 +34,6 @@ public class Stack {
         return last;
     }
 
-    public List<Object> copy(List<Object> original) {
-        return new ArrayList<>(original);
-    }
-
     public Object top() {
         return elements.size() > 0 ? elements.get(elements.size() - 1) : null;
     }
