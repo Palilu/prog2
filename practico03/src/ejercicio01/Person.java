@@ -52,7 +52,7 @@ public class Person {
     }
 
     public Boolean isMyBirthday() {
-        LocalDate today = LocalDate.now(ZoneId.of("AGT"));
+        LocalDate today = LocalDate.now();
         return dob.getDayOfMonth() == today.getDayOfMonth() && dob.getMonth() == today.getMonth();
     }
 
