@@ -32,9 +32,7 @@ public class TextParser {
     }
 
     public List<String> getTop(Integer top) {
-        return wordsSortedByCount.subList(0, top)
-                .stream()
-                .collect(Collectors.toList());
+        return wordsSortedByCount.subList(0, top);
     }
 
     public List<String> getLast(Integer last) {
@@ -49,6 +47,7 @@ public class TextParser {
     }
 
     public List<String> getSortedWords() {
+        // Podría guardar este resultado ordenado tambien
         return wordCount.keySet().stream().sorted().collect(Collectors.toList());
     }
 
