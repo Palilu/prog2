@@ -27,7 +27,7 @@ import java.nio.file.Paths;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        String filename = "practico07/resources/Constitucion.md";
+        String filename = "practico07/src/ejercicio02/Constitucion.md";
         Path pathToFile = Paths.get(filename);
         TextParser tp = new TextParser(Files.readString(pathToFile, StandardCharsets.UTF_8));
         // Conocer la cantidad de palabras diferentes que contiene el texto.
