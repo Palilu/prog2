@@ -50,9 +50,9 @@ public class NewsGroup extends NewsNode {
         pathBuilder.append(basePath);
         pathBuilder.append(System.lineSeparator());
         // Imprime cada hijo con su path como prefijo
-        elements.forEach(element -> {
-            pathBuilder.append(element.getPath(basePath));
-        });
+        elements.stream()
+                .map(element -> element.getPath(basePath))
+                .forEach(pathBuilder::append);
         return pathBuilder.toString();
     }
 
