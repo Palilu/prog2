@@ -2,6 +2,9 @@ package lavoz.filtros;
 
 import lavoz.Participante;
 
+/**
+ * toquen un instrumento específico. Por ejemplo “Guitarra”
+ */
 public class TocaInstrumento implements FiltroParticipante {
 
     private String instrumento;

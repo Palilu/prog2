@@ -1,5 +1,7 @@
 package lavoz;
 
+import lavoz.filtros.Filtros;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,14 @@ public class Tema {
         this.idioma = idioma;
         this.generos = generos;
         this.instrumentos = instrumentos;
+    }
+
+    public Boolean puedeSerInterpretadoPor(Participante participante) {
+        // 4. Un tema puede ser interpretado por una banda/grupo/solista si puede cantar en el idioma del
+        // tema y al menos uno de los géneros está entre las preferencias del grupo/banda/solista.
+        return Filtros.cantaIdioma(idioma).filtrar(participante) && generos.stream()
+                .filter(genero -> Filtros.prefiereGenero(genero).filtrar(participante))
+                .findFirst().isPresent();
     }
 
     public String getTitulo() {

@@ -2,6 +2,11 @@ package lavoz.filtros;
 
 import lavoz.Participante;
 
+/**
+ * Los anteriores son algunos ejemplos de los listados que la producción le pide
+ * constantemente a los jurados. Se pueden agregar nuevos requerimientos de búsquedas así
+ * como combinación lógicas de los existentes.
+ */
 public class FiltroOr implements FiltroParticipante {
 
     private FiltroParticipante filtroParticipante1;

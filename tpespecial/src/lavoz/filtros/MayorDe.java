@@ -2,6 +2,9 @@ package lavoz.filtros;
 
 import lavoz.Participante;
 
+/**
+ * Todos los participantes mayores de una determinada edad.
+ */
 public class MayorDe implements FiltroParticipante {
 
     private Integer edad;

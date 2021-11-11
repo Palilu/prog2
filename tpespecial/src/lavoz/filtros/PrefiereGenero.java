@@ -2,6 +2,9 @@ package lavoz.filtros;
 
 import lavoz.Participante;
 
+/**
+ * Prefieren un determinado género, por ejemplo “rock”.
+ */
 public class PrefiereGenero implements FiltroParticipante {
 
     private String genero;

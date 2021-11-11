@@ -2,6 +2,9 @@ package lavoz.filtros;
 
 import lavoz.Participante;
 
+/**
+ * Canten en un determinado idioma y toquen un instrumento específico. Por ejemplo, “Aleman” y “Guitarra”
+ */
 public class FiltroAnd implements FiltroParticipante {
 
     private FiltroParticipante filtroParticipante1;

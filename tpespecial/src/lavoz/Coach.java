@@ -3,10 +3,11 @@ package lavoz;
 import lavoz.filtros.FiltroParticipante;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * Cada coach/jurado tiene un listado de participantes asignados como equipo propio. Para una mejor
- * organización, cada coach/jurado desea poder obtener:
+ * Ahora cada coach/jurado tiene un listado de participantes asignados como equipo propio, este listado
+ * puede incluir Bandas, Grupos o Integrantes solistas.
  */
 public class Coach {
 
@@ -27,11 +28,7 @@ public class Coach {
      * (no debe haber repetidos)
      */
     public Set<String> obtenerInstrumentosEquipo() {
-        Set<String> instrumentos = new HashSet<>();
-        for (Participante participante : this.equipo) {
-            instrumentos.addAll(participante.getInstrumentos());
-        }
-        return instrumentos;
+        return new Banda(null, equipo).getInstrumentos();
     }
 
     /**
@@ -39,11 +36,7 @@ public class Coach {
      * (sin idiomas repetidos)
      */
     public Set<String> obtenerIdiomasEquipo() {
-        Set<String> idiomas = new HashSet<>();
-        for (Participante participante : this.equipo) {
-            idiomas.addAll(participante.getIdiomas());
-        }
-        return idiomas;
+        return new Banda(null, equipo).getIdiomas();
     }
 
     /**
@@ -51,32 +44,30 @@ public class Coach {
      * (sin repetidos y ordenados alfabéticamente)
      */
     public Set<String> obtenerGenerosEquipo() {
-        Set<String> generos = new HashSet<>();
-        for (Participante participante : this.equipo) {
-            generos.addAll(participante.getGeneros());
-        }
-        return new TreeSet<>(generos);
+        return new TreeSet<>(equipo.stream()
+                .map(Participante::getGeneros)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet()));
     }
 
     /**
      * @return El promedio de edad de su equipo
      */
-    public Double obtenerPromedioEdadEquipo() {
-        Double suma = 0D;
-        for (Participante participante : this.equipo) {
-            suma += participante.getEdad();
-        }
-        return suma / this.equipo.size();
+    public Integer obtenerPromedioEdadEquipo() {
+        return new Banda(null, equipo).getEdad();
     }
 
     public List<Participante> buscar(FiltroParticipante filtroParticipante) {
-        List<Participante> resultado = new ArrayList<>();
-        for (Participante participante : this.equipo) {
-            if (filtroParticipante.filtrar(participante)) {
-                resultado.add(participante);
-            }
-        }
-        return resultado;
+        return this.equipo.stream()
+                .map(miembro -> miembro.filtrar(filtroParticipante))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
+
+    public List<Participante> obtenerEquipoOrdenadoParaLaBatalla(Comparator<Participante> reglasBatalla) {
+        return this.equipo.stream()
+                .sorted(reglasBatalla)
+                .collect(Collectors.toList());
     }
 
     public String getNombre() {
